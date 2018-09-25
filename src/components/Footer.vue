@@ -69,7 +69,7 @@
                 firebase.auth().signInWithRedirect(provider);
                 firebase.auth().getRedirectResult().then(result => {
                     if (result) {
-                        this.$router.push('/chat');
+                        this.$router.push('/');
                     }
                 }).catch(error => {
                     if (error) {
