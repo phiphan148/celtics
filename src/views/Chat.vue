@@ -43,140 +43,138 @@
 </template>
 
 <script>
-    export default {
-        name: "Chat",
-        components: {},
-        data() {
-            return {
-                currentUser: '',
-                obj: {},
-                inputTxt: '',
-                data: {}
-            }
-        },
-        created() {
-            this.getPosts();
-        },
-        methods: {
-            pad(s) {
-                return (s < 10) ? '0' + s : s;
-            },
-            writeNewPost() {
-                firebase.auth().onAuthStateChanged(user => {
-                    if (user) {
-                
-                    } else {
-                        alert('Please sign in to send the message')
-                    }
-                });
-                var user = firebase.auth().currentUser;
-                this.currentUser = user.displayName;
-                var currentDate = new Date();
-                var date = [this.pad(currentDate.getDate()), this.pad(currentDate.getMonth() + 1), currentDate.getFullYear()].join('/');
-                var time = [this.pad(currentDate.getHours()), this.pad(currentDate.getMinutes() + 1), currentDate.getSeconds()].join(':');
-                if (this.inputTxt != '') {
-                    var newKeyPost = database.ref().child('posts').push().key;
-                    firebase.database().ref(`posts/${newKeyPost}`).set({
-                        username: this.currentUser,
-                        photo: user.photoURL,
-                        mess: this.inputTxt,
-                        date: date,
-                        time: time
-                    });
-                }
-                this.inputTxt = '';
-            },
-            getData(received) {
-                this.data = received.val();
-                this.currentUser = firebase.auth().currentUser.displayName;
-            },
-            getPosts() {
-                var messages = database.ref().child('posts');
-                messages.on('value', this.getData);
-            },
-        }
+export default {
+  name: "Chat",
+  components: {},
+  data() {
+    return {
+      currentUser: "",
+      obj: {},
+      inputTxt: "",
+      data: {}
     };
+  },
+  created() {
+    this.getPosts();
+  },
+  methods: {
+    pad(s) {
+      return s < 10 ? "0" + s : s;
+    },
+    writeNewPost() {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          var user = firebase.auth().currentUser;
+          this.currentUser = user.displayName;
+          var currentDate = new Date();
+          var date = [this.pad(currentDate.getDate()),this.pad(currentDate.getMonth() + 1),currentDate.getFullYear()].join("/");
+          var time = [this.pad(currentDate.getHours()),this.pad(currentDate.getMinutes() + 1),currentDate.getSeconds()].join(":");
+          if (this.inputTxt != "") {
+            var newKeyPost = database.ref().child("posts").push().key;
+            firebase.database().ref(`posts/${newKeyPost}`).set({
+                username: this.currentUser,
+                photo: user.photoURL,
+                mess: this.inputTxt,
+                date: date,
+                time: time
+              });
+          }
+          this.inputTxt = "";
+        } else {
+          alert("Please sign in to send the message");
+        }
+      });
+    },
+    getData(received) {
+      this.data = received.val();
+      this.currentUser = firebase.auth().currentUser.displayName;
+    },
+    getPosts() {
+      var messages = database.ref().child("posts");
+      messages.on("value", this.getData);
+    }
+  }
+};
 </script>
 
 <style scoped>
-    .convo {
-        min-height: 80vh;
-    }
+.convo {
+  min-height: 80vh;
+}
 
-    .convo img {
-        width: 50%;
-        height: 50%;
-        border-radius: 50%;
-    }
+.convo img {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+}
 
-    .convo .txt {
-        position: relative;
-        background: #fff;
-        border-radius: .8em;
-        word-wrap: break-word;
-    }
+.convo .txt {
+  position: relative;
+  background: #fff;
+  border-radius: 0.8em;
+  word-wrap: break-word;
+}
 
-    .convo .txt:after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        width: 0;
-        height: 0;
-        border: 11px solid transparent;
-        border-right-color: #fff;
-        border-left: 0;
-        border-top: 0;
-        margin-top: -5.5px;
-        margin-left: -11px;
-    }
+.convo .txt:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 11px solid transparent;
+  border-right-color: #fff;
+  border-left: 0;
+  border-top: 0;
+  margin-top: -5.5px;
+  margin-left: -11px;
+}
 
-    .inputs button {
-        background: #08843B;
-        border-radius: 3px;
-        padding: 5px;
-        color: white;
-        font-weight: bold;
-        margin-left: -1px;
-        box-sizing: border-box;
-        width: 15%;
-        outline: none;
-    }
+.inputs button {
+  background: #08843b;
+  border-radius: 3px;
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+  margin-left: -1px;
+  box-sizing: border-box;
+  width: 15%;
+  outline: none;
+}
 
-    .inputs input {
-        width: 85%;
-        border-radius: 3px 0px 3px 0px;
-        border: none;
-        padding: 5px;
-        outline: none;
-    }
+.inputs input {
+  width: 85%;
+  border-radius: 3px 0px 3px 0px;
+  border: none;
+  padding: 5px;
+  outline: none;
+}
 
-    .time {
-        color: #08843B;
-        font-size: 9px;
-    }
+.time {
+  color: #08843b;
+  font-size: 9px;
+}
 
-    .convo .txt-right {
-        position: relative;
-        background: #fff;
-        border-radius: .8em;
-        word-wrap: break-word;
-    }
+.convo .txt-right {
+  position: relative;
+  background: #fff;
+  border-radius: 0.8em;
+  word-wrap: break-word;
+}
 
-    .convo .txt-right:after {
-        content: '';
-        position: absolute;
-        right: 0;
-        top: 50%;
-        width: 0;
-        height: 0;
-        border: 11px solid transparent;
-        border-left-color: #fff;
-        border-right: 0;
-        border-top: 0;
-        margin-top: -5.5px;
-        margin-right: -11px;
-    }
-
+.convo .txt-right:after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 0;
+  height: 0;
+  border: 11px solid transparent;
+  border-left-color: #fff;
+  border-right: 0;
+  border-top: 0;
+  margin-top: -5.5px;
+  margin-right: -11px;
+}
 </style>
 
