@@ -3,7 +3,7 @@
         <div class="container">
             <div class="convo">
                 <div v-for="obj in data">
-                    <div v-if="obj.username.includes(checkUser)" class="mb-2 row text-left">
+                    <div v-if="obj.username.includes(currentUser)" class="mb-2 row text-left">
                         <img class="col-2 img-fluid" :src=obj.photo>
                         <div class="col align-self-center" style="margin: 0px">
                             <div class="row" style="padding: 0px">
@@ -54,11 +54,6 @@
                 data: {}
             }
         },
-        computed: {
-            checkUser() {
-                return firebase.auth().currentUser.displayName;
-            }
-        },
         created() {
             this.getPosts();
         },
@@ -67,21 +62,22 @@
                 return (s < 10) ? '0' + s : s;
             },
             writeNewPost() {
-                // firebase.auth().onAuthStateChanged(user => {
-                //     if (user) {
-                //
-                //     } else {
-                //         alert('Please sign in to send the message')
-                //     }
-                // });
+                firebase.auth().onAuthStateChanged(user => {
+                    if (user) {
+                
+                    } else {
+                        alert('Please sign in to send the message')
+                    }
+                });
                 var user = firebase.auth().currentUser;
+                this.currentUser = user.displayName;
                 var currentDate = new Date();
                 var date = [this.pad(currentDate.getDate()), this.pad(currentDate.getMonth() + 1), currentDate.getFullYear()].join('/');
                 var time = [this.pad(currentDate.getHours()), this.pad(currentDate.getMinutes() + 1), currentDate.getSeconds()].join(':');
                 if (this.inputTxt != '') {
                     var newKeyPost = database.ref().child('posts').push().key;
                     firebase.database().ref(`posts/${newKeyPost}`).set({
-                        username: this.checkUser,
+                        username: this.currentUser,
                         photo: user.photoURL,
                         mess: this.inputTxt,
                         date: date,
