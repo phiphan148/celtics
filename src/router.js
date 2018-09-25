@@ -8,6 +8,7 @@ import Ticket from "./views/Ticket.vue";
 import GameDetails from "./views/GameDetails.vue";
 import BuyTicket from "./views/BuyTicket.vue";
 import Chat from "./views/Chat.vue";
+import Login from "./views/Login.vue";
 
 Vue.use(Router);
 
@@ -53,7 +54,24 @@ export default new Router({
         {
             path: "/chat",
             name: "chat",
-            component: Chat
+            component: Chat,
+            // meta: {
+            //     requiresAuth: true
+            // }
+        },
+        {
+            path: "/login",
+            name: "login",
+            component: Login,
         }
     ]
 });
+
+// Router.beforeEach ((to, from, next) => {
+//     let currentUser = firebase.auth().currentUser;
+//     let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+//
+//     if (requiresAuth && !currentUser) next('home')
+//     else if(!requiresAuth && currentUser) next ('chat')
+//     else next()
+// })

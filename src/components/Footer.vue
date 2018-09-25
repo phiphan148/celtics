@@ -4,14 +4,24 @@
             <div class="col-7">
                 <router-link to="/">Home</router-link>
                 <div class="footer-menu-left menuClose">
-                    <p><router-link to="/players">Players</router-link></p>
-                    <p><router-link to="/schedule">Game Schedule</router-link></p>
-                    <p><router-link to="/ticket">Book Ticket</router-link></p>
-                    <p><router-link to="/location">Location</router-link></p>
+                    <p>
+                        <router-link to="/players">Players</router-link>
+                    </p>
+                    <p>
+                        <router-link to="/schedule">Game Schedule</router-link>
+                    </p>
+                    <p>
+                        <router-link to="/ticket">Book Ticket</router-link>
+                    </p>
+                    <p>
+                        <router-link to="/location">Location</router-link>
+                    </p>
                 </div>
             </div>
             <div class="col-5">
-                <p v-if="logIn" v-on:click="login">Login</p>
+                <div v-if="logIn">
+                    <router-link to="/login"><p>Login</p></router-link>
+                </div>
                 <p v-on:click="logout" v-else>Logout</p>
                 <p v-on:click="gotoChat" id="chatPage" class="menuClose">Chat</p>
             </div>
@@ -40,7 +50,6 @@
             footerexpand() {
                 if (this.isOpen === false) {
                     document.querySelector('.footer-img').classList.remove('imgClose');
-                    // document.getElementById('footerId').classList.remove('footerClose');
                     document.getElementById('footerId').classList += ' footerOpen';
                     document.querySelector('.footer-img').classList += ' imgOpen';
                     document.querySelector('.footer-menu-left').classList += ' menuOpen';
@@ -64,19 +73,6 @@
                     }
                 });
             },
-            login() {
-                var provider = new firebase.auth.GoogleAuthProvider();
-                firebase.auth().signInWithRedirect(provider);
-                firebase.auth().getRedirectResult().then(result => {
-                    if (result) {
-                        this.$router.push('/');
-                    }
-                }).catch(error => {
-                    if (error) {
-                        alert('Please try again')
-                    }
-                })
-            },
             logout() {
                 firebase.auth().signOut().then(result => {
                     if (result) {
@@ -92,7 +88,7 @@
                     if (user) {
                         this.$router.push('/chat');
                     } else {
-                        alert('Please log in to access the chat feature')
+                        this.$router.push('/login');
                     }
                 });
 
@@ -200,4 +196,3 @@
         opacity: 1;
     }
 </style>
-
