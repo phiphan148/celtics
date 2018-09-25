@@ -18,8 +18,8 @@
                     <div class="col-9 align-self-center">
                         <p><input v-model="passwordLogIn" type="password" id="pass1"></p>
                         <div class="row container mt-1">
-                            <input class="col-1" type="checkbox" v-on:click="checkPass1">
-                            <p class="col text-left" style="padding:0px">Show password</p>
+                            <input class="col-1" type="checkbox" v-on:click="checkPass('pass1')">
+                            <p class="col text-left align-self-center small-txt" style="padding:0px">Show password</p>
                         </div>
                     </div>
                 </div>
@@ -59,8 +59,8 @@
                     <div class="col-9 align-self-center">
                         <p><input v-model="passwordSignup" type="password" id="pass2"></p>
                         <div class="row container mt-1">
-                            <input class="col-1" type="checkbox" v-on:click="checkPass2">
-                            <p class="col text-left" style="padding:0px">Show password</p>
+                            <input class="col-1" type="checkbox" v-on:click="checkPass('pass2')">
+                            <p class="col text-left align-self-center small-txt" style="padding:0px">Show password</p>
                         </div>
                     </div>
                 </div>
@@ -107,8 +107,8 @@ export default {
           })
           .catch(function(error) {
             // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
+            let errorCode = error.code;
+            let errorMessage = error.message;
             alert(errorMessage);
           });
       } else {
@@ -136,31 +136,23 @@ export default {
         .getRedirectResult()
         .then(result => {
           if (result) {
-            this.$router.push("/");
+            this.$router.push("/chat");
           }
         })
-        .catch(error => {
-          if (error) {
-            alert("Please try again");
-          }
-        });
+        .catch(function(error) {
+            let errorCode = error.code;
+            let errorMessage = error.message;
+            alert(errorMessage);
+          });
     },
-    checkPass1(){
-        let pass = document.getElementById("pass1");
+    checkPass(idInput){
+        let pass = document.getElementById(idInput);
         if (pass.type === "password") {
             pass.type = "text";
             } else {
             pass.type = "password";
         }
     },
-    checkPass2(){
-        let pass = document.getElementById("pass2");
-        if (pass.type === "password") {
-            pass.type = "text";
-            } else {
-            pass.type = "password";
-        }
-    }
   }
 };
 </script>
@@ -169,7 +161,9 @@ export default {
 .login {
   min-height: 85vh;
 }
-
+.login .small-txt{
+    font-size: 10px;
+}
 .login input {
   border: none;
   outer: none;
