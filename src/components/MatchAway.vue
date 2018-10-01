@@ -44,10 +44,11 @@
                     </div>
                     <iframe class="map-frame" :src=match.away.map frameborder="0" allowfullscreen></iframe>
                 </div>
-                <video v-if="new Date(match.away.date.split('/')[2],match.away.date.split('/')[1]-1, match.away.date.split('/')[0]).getTime()<currentDate.getTime()" class="mt-3" width="100%" controls>
-                    <source :src=match.home.video type="video/mp4">
-                    Your browser does not support HTML5 video.
-                </video>
+                <video ref="videoRef" src="http://iandevlin.github.io/mdn/video-player/video/tears-of-steel-battle-clip-medium.mp4" id="video-container" width="100%" controls></video>
+                <!--<video v-if="new Date(match.away.date.split('/')[2],match.away.date.split('/')[1]-1, match.away.date.split('/')[0]).getTime()<currentDate.getTime()" class="mt-3" width="100%" controls>-->
+                    <!--<source :src=match.home.video type="video/mp4">-->
+                    <!--Your browser does not support HTML5 video.-->
+                <!--</video>-->
             </div>
         </div>
     </div>
@@ -58,13 +59,13 @@
         name: "MatchAway",
         data() {
             return {
-                currentDate: new Date()
+                currentDate: new Date(),
             };
         },
         components: {},
         props: {
             matches: Array,
-        }
+        },
     };
 </script>
 
