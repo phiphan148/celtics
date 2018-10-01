@@ -47,8 +47,7 @@
                     <iframe class="map-frame" :src=match.home.map frameborder="0" allowfullscreen></iframe>
                 </div>
                 <video v-if="new Date(match.home.date.split('/')[2],match.home.date.split('/')[1]-1, match.home.date.split('/')[0]).getTime()<currentDate.getTime()" class="mt-3" width="100%" controls>
-                    <source :src=match.home.video type="video/mp4">
-                    Your browser does not support HTML5 video.
+                    <source src="https://phiphan148.github.io/celtics/video/celtics.mp4" type="video/mp4">
                 </video>
             </div>
         </div>

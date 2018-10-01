@@ -23,7 +23,8 @@
         },
         methods:{
             getData: function () {
-                  fetch('https://api.myjson.com/bins/9pvbg')
+                  // fetch('https://api.myjson.com/bins/9pvbg')
+                  fetch('https://api.myjson.com/bins/6nzdk')
                       .then(response => response.json())
                       .then((jsonData)=>{
                           let data = jsonData;
