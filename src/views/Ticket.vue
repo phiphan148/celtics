@@ -1,10 +1,6 @@
 <template>
     <div class="container ticket">
         <div class="container content-box">
-            <!--<div v-for="ticket in ticketData">-->
-
-            <!--<BuyTicketType v-bind:titleTicketType="ticket.singleTicket.title" v-bind:descriptionTicketType="ticket.singleTicket.description" v-bind:imgTicketType="ticket.singleTicket.img" v-bind:linkimgTicketType="ticket.singleTicket.link" ></BuyTicketType>-->
-            <!--</div>-->
             <div class="card text-left section">
                 <img class="card-img-top" src="../assets/tickettype/individual.jpg" alt="individual ticket">
                 <div class="card-body">
@@ -48,13 +44,12 @@
         components: {BuyTicketType},
         data(){
             return{
-                ticketData:[{"singleTicket":{"img":"img/individual.jpg","title":"Individual Game Tickets","description":"Don't miss out! Purchase tickets to individual games.","btn": "Buy ticket","link":"buyticket"}}]
             }
         }
     };
 </script>
 
-<style>
+<style scoped>
 .content-box{
     padding-top: 20px;
 }

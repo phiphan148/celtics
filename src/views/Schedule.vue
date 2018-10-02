@@ -126,6 +126,18 @@
 </script>
 
 <style scoped>
+    @media only screen and (min-width: 992px){
+        .ticket .card img {
+            width: 40% !important;
+        }
+    }
+
+    @media only screen and (min-width: 768px) and (max-width: 991px){
+        .ticket .card img {
+            width: 60% !important;
+        }
+    }
+    
     .content-box .card p {
         font-size: 10px;
     }

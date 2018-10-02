@@ -13,11 +13,11 @@
                 <div class="card card-body text-left section">
                     <p class="font-weight-bold title-txt">{{match.opponent.name}}</p>
                     <p class="font-weight-bold">{{match.away.location}}</p>
+                    <iframe class="map-frame mt-2" :src=match.away.map frameborder="0" allowfullscreen></iframe>
                     <!--<div v-on:click="showMap(match)">-->
                         <!--<p>Show map</p>-->
                         <!--<iframe v-if="show" class="map-frame mt-2" :src=map frameborder="0" allowfullscreen></iframe>-->
                     <!--</div>-->
-
                 </div>
             </div>
         </div>

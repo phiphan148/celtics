@@ -3,7 +3,7 @@
         <div class="container">
             <div class="convo">
                 <div v-for="obj in data">
-                    <div v-if="obj.username.includes(currentUser)"  class="mb-2 row text-left">
+                    <div v-if="obj.username.includes(currentUser)" class="mb-2 row text-left">
                         <img class="col-2 img-fluid" :src=obj.photo>
                         <div class="col align-self-center" style="margin: 0px">
                             <div class="row" style="padding: 0px">
@@ -53,8 +53,7 @@
                 data: {},
             }
         },
-        computed: {
-        },
+        computed: {},
         created() {
             this.getPosts();
         },
@@ -93,7 +92,7 @@
             getPosts() {
                 let messages = database.ref().child('posts');
                 messages.on('value', this.getData)
-            },
+            }
         }
     };
 </script>

@@ -110,7 +110,7 @@ export default {
   }
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1200px) {
+@media only screen and (min-width: 768px) {
   .footer {
     min-height: 5% !important;
   }
@@ -154,7 +154,7 @@ export default {
 .footer a,
 p {
   font-size: 14px;
-  line-height: 25px;
+  line-height: 23px;
   cursor: pointer;
 }
 

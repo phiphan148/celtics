@@ -20,13 +20,14 @@
                         <div class="col-5"><p>{{match.opponent.name}}</p></div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-5">
                             <p>
                                 <i class="far fa-calendar-alt"><span class="ml-1">{{match.home.time}}</span><span class="ml-1">{{match.home.date}}</span></i>
                             </p>
                             <p><i class="fas fa-ticket-alt"></i><span class="ml-1">{{match.home.ticket_price}}</span></p>
                         </div>
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-5">
                             <p><i class="fas fa-map-marker-alt"></i><span class="ml-1">{{match.home.location}}</span></p>
                             <p><i class="title-txt fas fa-shopping-cart"></i><a href="https://www.nba.com/celtics/schedule?page=individualTickets"><span class="ml-1 title-txt">Buy ticket</span></a></p>
                         </div>
@@ -50,13 +51,14 @@
                         <div class="col-5"><p>Boston Celtics</p></div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-5">
                             <p>
                                 <i class="far fa-calendar-alt"><span class="ml-1">{{match.away.time}}</span><span class="ml-1">{{match.away.date}}</span></i>
                             </p>
                             <p><i class="fas fa-ticket-alt"></i><span class="ml-1">{{match.away.ticket_price}}</span></p>
                         </div>
-                        <div class="col-6">
+                        <div class="col-2"></div>
+                        <div class="col-5">
                             <p><i class="fas fa-map-marker-alt"></i><span class="ml-1">{{match.away.location}}</span></p>
                             <p><i class="title-txt fas fa-shopping-cart"></i><span class="ml-1 title-txt">Buy ticket</span></p>
                         </div>
@@ -84,6 +86,12 @@
 </script>
 
 <style scoped>
+    @media only screen and (min-width: 992px){
+        .logo-card img{
+            width: 40%!important;
+        }
+    }
+
 .logo-card img{
     width: 50%;
 }
