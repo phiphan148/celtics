@@ -222,6 +222,7 @@
         border-radius: 3px;
         font-weight: bold;
         margin-top: 12px;
+        border: none;
     }
 
     .login button:focus {

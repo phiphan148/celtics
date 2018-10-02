@@ -140,6 +140,7 @@
         box-sizing: border-box;
         width: 15%;
         outline: none;
+        border: none;
     }
 
     .inputs input {
