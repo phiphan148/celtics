@@ -71,15 +71,36 @@
                         var time = [this.pad(currentDate.getHours()), this.pad(currentDate.getMinutes() + 1), currentDate.getSeconds()].join(':');
                         if (this.inputTxt != '') {
                             var newKeyPost = database.ref().child('posts').push().key;
-                            firebase.database().ref(`posts/${newKeyPost}`).set({
-                                username: this.currentUser,
-                                photo: user.photoURL,
-                                // photo: this.$store.state.photoURL,
-                                mess: this.inputTxt,
-                                date: date,
-                                time: time
-                            });
+                                firebase.database().ref(`posts/${newKeyPost}`).set({
+                                    username: this.currentUser,
+                                    photo: user.photoURL,
+                                    mess: this.inputTxt,
+                                    date: date,
+                                    time: time
+                                });
                         }
+                        // if (this.inputTxt != '') {
+                        //     var newKeyPost = database.ref().child('posts').push().key;
+                        //     if (this.$store.state.photoURL != '') {
+                        //     firebase.database().ref(`posts/${newKeyPost}`).set({
+                        //         username: this.currentUser,
+                        //         // photo: user.photoURL,
+                        //         photo: this.$store.state.photoURL,
+                        //         mess: this.inputTxt,
+                        //         date: date,
+                        //         time: time
+                        //     });
+                        // } else {
+                        //         firebase.database().ref(`posts/${newKeyPost}`).set({
+                        //             username: this.currentUser,
+                        //             photo: user.photoURL,
+                        //             // photo: this.$store.state.photoURL,
+                        //             mess: this.inputTxt,
+                        //             date: date,
+                        //             time: time
+                        //         });
+                        //     }
+                        // }
                         this.inputTxt = '';
                     }
                 });

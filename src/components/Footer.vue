@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="col-5">
-                <div @click="footerexpand" v-if="logIn">
+                <div v-if="logIn">
                     <router-link to="/login"><p>Login</p></router-link>
                 </div>
                 <p @click="footerexpand" v-on:click="logout" v-else>Logout</p>
