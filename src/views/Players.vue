@@ -52,6 +52,12 @@
 </script>
 
 <style>
+    @media only screen and (max-width: 576px) {
+        .style-table {
+            width: 100vh !important;
+        }
+    }
+
     .content {
         text-align: justify;
         word-break: break-word;
@@ -62,7 +68,6 @@
         margin-bottom: 15px;
     }
     .style-table {
-        width: 60vh;
         font-size: 10px;
     }
 
@@ -84,7 +89,7 @@
     }
 
     .players table > tr > th {
-         width: 9.3%;
+         width: 10.6%;
         color: #07843b;
         font-weight: bold;
      }
