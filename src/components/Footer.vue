@@ -4,26 +4,26 @@
             <div class="col-7">
                 <router-link to="/">Home</router-link>
                 <div class="footer-menu-left menuClose">
-                    <p>
+                    <p @click="footerexpand">
                         <router-link to="/players">Players</router-link>
                     </p>
-                    <p>
+                    <p @click="footerexpand">
                         <router-link to="/schedule">Game Schedule</router-link>
                     </p>
-                    <p>
+                    <p @click="footerexpand">
                         <router-link to="/ticket">Book Ticket</router-link>
                     </p>
-                    <p>
+                    <p @click="footerexpand">
                         <router-link to="/location">Location</router-link>
                     </p>
                 </div>
             </div>
             <div class="col-5">
-                <div v-if="logIn">
+                <div @click="footerexpand" v-if="logIn">
                     <router-link to="/login"><p>Login</p></router-link>
                 </div>
-                <p v-on:click="logout" v-else>Logout</p>
-                <p v-on:click="gotoChat" id="chatPage" class="menuClose">Chat</p>
+                <p @click="footerexpand" v-on:click="logout" v-else>Logout</p>
+                <p @click="footerexpand" v-on:click="gotoChat" id="chatPage" class="menuClose">Chat</p>
             </div>
         </div>
         <div class="col-3 col-md-1">

@@ -9,6 +9,7 @@ export default new Vuex.Store({
         players: [],
         team: '',
         date: '',
+        photoURL: ''
     },
     mutations: {
         getMatches(state, matches) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
         },
         updateDate(state, date){
             this.state.date = date;
+        },
+        updatePhotoUrl(state, photoURL){
+            this.state.photoURL = photoURL
         }
     },
     actions: {}

@@ -44,9 +44,13 @@
                         <p><input v-model="userName" type="text" required></p>
                     </div>
                 </div>
-                <!--<div id="filesubmit">-->
-                    <!--<input v-on:change="handleFileUploadChange" type="file" class="file-select" accept="image/*"/>-->
-                <!--</div>-->
+                <div class="row">
+                    <p class="col-3 text-left">Profile photo:</p>
+                    <div id="filesubmit" class="col">
+                        <input v-on:change="handleFileUploadChange" type="file" class="file-select" accept="image/*"/>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-3 align-self-center text-left">
                         <p>Email:<span class="text-danger">*</span></p>
@@ -87,40 +91,11 @@
                 emailSignup: "",
                 passwordSignup: "",
                 userName: "",
-                selectedFile: '',
-                photo: '',
+                selectedFile: "",
+                photoURL: ""
             };
         },
         methods: {
-            signUp() {
-                if (this.userName != "") {
-                    firebase
-                        .auth()
-                        .createUserWithEmailAndPassword(this.emailSignup, this.passwordSignup)
-                        .then(user => {
-                            user = firebase.auth().currentUser;
-                            // this.upPhoto(user);
-                            if (user) {
-                                user
-                                    .updateProfile({
-                                        displayName: this.userName,
-                                        photoURL: "https://i.imgur.com/vHZfqPP.png"
-                                    })
-                                    .then(function () {
-                                    });
-                            }
-                            this.$router.push("/chat");
-                        })
-                        .catch(function (error) {
-                            // Handle Errors here.
-                            let errorCode = error.code;
-                            let errorMessage = error.message;
-                            alert(errorMessage);
-                        });
-                } else {
-                    alert("Please fill your name");
-                }
-            },
             login() {
                 firebase
                     .auth()
@@ -131,7 +106,7 @@
                     .catch(function (error) {
                         let errorCode = error.code;
                         let errorMessage = error.message;
-                        alert(errorMessage);
+                        alert(errorCode + errorMessage);
                     });
             },
             loginG() {
@@ -148,7 +123,7 @@
                     .catch(function (error) {
                         let errorCode = error.code;
                         let errorMessage = error.message;
-                        alert(errorMessage);
+                        alert(errorCode + errorMessage);
                     });
             },
             checkPass(idInput) {
@@ -159,43 +134,88 @@
                     pass.type = "password";
                 }
             },
-            handleFileUploadChange(e){
+            handleFileUploadChange(e) {
                 this.selectedFile = e.target.files[0];
-                console.log(this.selectedFile)
+                console.log(this.selectedFile);
             },
-            upPhoto(user){
-                var storageRef = firebase.storage().ref(user.uid + '/profilePicture/' + this.selectedFile.name);
-                    const uploadTask = storageRef.put(this.selectedFile);
-                storageRef.getDownloadURL().then(url=> {
-                        this.photo = url
-                    }).catch(function(error) {
+            upPhoto(user) {
+                var storageRef = firebase
+                    .storage()
+                    .ref(`${user.uid}/${this.selectedFile.name}`);
+                const uploadTask = storageRef.put(this.selectedFile);
+                uploadTask.then((snapshot) => {
+                    snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        this.$store.commit('updatePhotoUrl',downloadURL)
+                        this.photoURL = downloadURL;
+                        console.log(this.photoURL);
+                        console.log(this.$store.state.photoURL);
+                        // return this.photoURL
+                    })
+                })
+                    .catch(function (error) {
                     });
-                    uploadTask.on('state_changed', (snapshot) => {
+                uploadTask.on(
+                    "state_changed",
+                    snapshot => {
                         // Observe state change events such as progress, pause, and resume
-                    }, (error) => {
+                    },
+                    error => {
                         // Handle unsuccessful uploads
                         console.log(error);
-                    }, () => {
+                    },
+                    () => {
                         // Do something once upload is complete
                         // this.photo = uploadTask.snapshot.downloadURL;
-                        console.log('success');
-                    });
-            }
+                        console.log("success");
+                    }
+                );
+            },
+            signUp() {
+                if (this.userName != "") {
+                    firebase
+                        .auth()
+                        .createUserWithEmailAndPassword(this.emailSignup, this.passwordSignup)
+                        .then(user => {
+                            user = firebase.auth().currentUser;
+                            this.upPhoto(user);
+                            console.log(this.photoURL);
+                            if (user) {
+                                user
+                                    .updateProfile({
+                                        displayName: this.userName,
+                                        photoURL: "https://i.imgur.com/vHZfqPP.png"
+                                        // photoURL: this.$store.state.photoURL
+                                    })
+                                    .then(function () {
+                                    });
+                            }
+                            this.$router.push("/chat");
+                        })
+                        .catch(function (error) {
+                            let errorMessage = error.message;
+                            alert(errorMessage);
+                        });
+                } else {
+                    alert("Please fill your name");
+                }
+            },
         }
     };
 </script>
 
 <style scoped>
-    @media only screen and (min-width: 768px) and (max-width: 991px){
+    @media only screen and (min-width: 768px) and (max-width: 991px) {
         .show-pass {
             width: 50% !important;
         }
     }
-    @media only screen and (min-width: 992px){
+
+    @media only screen and (min-width: 992px) {
         .show-pass {
             width: 35% !important;
         }
     }
+
     .login {
         min-height: 85vh;
     }

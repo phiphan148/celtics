@@ -4,7 +4,7 @@
             <div class="convo">
                 <div v-for="obj in data">
                     <div v-if="obj.username.includes(currentUser)" class="mb-2 row text-left">
-                        <img class="col-2 img-fluid" :src=obj.photo>
+                        <img class="col-2 col-md-1 img-fluid" :src=obj.photo>
                         <div class="col align-self-center" style="margin: 0px">
                             <div class="row" style="padding: 0px">
                                 <div class="col-6 txt">
@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         </div>
-                        <img class="col-2 img-fluid" :src=obj.photo>
+                        <img class="col-2 col-md-1 img-fluid" :src=obj.photo>
                     </div>
                 </div>
             </div>
@@ -74,6 +74,7 @@
                             firebase.database().ref(`posts/${newKeyPost}`).set({
                                 username: this.currentUser,
                                 photo: user.photoURL,
+                                // photo: this.$store.state.photoURL,
                                 mess: this.inputTxt,
                                 date: date,
                                 time: time
@@ -86,8 +87,8 @@
             getData(received) {
                 this.data = received.val();
                 this.currentUser = firebase.auth().currentUser.displayName;
-                console.log(this.data);
-                console.log(this.currentUser);
+                // console.log(this.data);
+                // console.log(this.currentUser);
             },
             getPosts() {
                 let messages = database.ref().child('posts');
