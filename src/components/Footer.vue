@@ -22,7 +22,7 @@
                 <div v-if="logIn">
                     <router-link to="/login"><p>Login</p></router-link>
                 </div>
-                <p @click="footerexpand" v-on:click="logout" v-else>Logout</p>
+                <p v-on:click="logout" v-else>Logout</p>
                 <p @click="footerexpand" v-on:click="gotoChat" id="chatPage" class="menuClose">Chat</p>
             </div>
         </div>
