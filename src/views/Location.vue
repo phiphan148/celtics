@@ -13,10 +13,8 @@
                 <div class="card card-body text-left section">
                     <p class="font-weight-bold title-txt">{{match.opponent.name}}</p>
                     <p class="font-weight-bold">{{match.away.location}}</p>
-                    <!--<div v-on:click="showMap(match)">-->
-                        <!--<p>Show map</p>-->
-                        <!--<iframe v-if="show" class="map-frame mt-2" :src=map frameborder="0" allowfullscreen></iframe>-->
-                    <!--</div>-->
+                    <!--<p v-on:click="showMap(match)">Show map</p>-->
+                    <!--<iframe v-if="show" class="map-frame mt-2" :src=match.away.map frameborder="0" allowfullscreen></iframe>-->
                 </div>
             </div>
         </div>
@@ -37,14 +35,15 @@
                 return this.$store.state.matches.filter(match => match.opponent.name.toLowerCase().includes(this.search.toLowerCase()) || match.away.location.toLowerCase().includes(this.search.toLowerCase()));
             }
         },
-        methods:{
-            showMap(match){
-                if(this.show == false){
+        methods: {
+            showMap(match) {
+                if (this.show == false) {
                     this.show = true;
-                    this.map = match.away.map;
+                    // this.map = match.away.map;
                 } else {
                     this.show = false;
                 }
+                this.$forceUpdate();
             },
             searchExpand() {
                 $(document).ready(function () {
@@ -66,7 +65,7 @@
                 })
             },
         },
-        mounted(){
+        mounted() {
             this.searchExpand();
         }
     };
